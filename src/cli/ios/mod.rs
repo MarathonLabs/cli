@@ -58,15 +58,15 @@ impl Display for IosDevice {
 pub enum OsVersion {
     #[clap(name = "17.5")]
     Ios17_5,
-    #[clap(name = "18.1")]
-    Ios18_1,
+    #[clap(name = "18.2")]
+    Ios18_2,
 }
 
 impl Display for OsVersion {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             OsVersion::Ios17_5 => f.write_str("com.apple.CoreSimulator.SimRuntime.iOS-17-5"),
-            OsVersion::Ios18_1 => f.write_str("com.apple.CoreSimulator.SimRuntime.iOS-18-1"),
+            OsVersion::Ios18_2 => f.write_str("com.apple.CoreSimulator.SimRuntime.iOS-18-2"),
         }
     }
 }
@@ -75,15 +75,15 @@ impl Display for OsVersion {
 pub enum XcodeVersion {
     #[clap(name = "15.4")]
     Xcode15_4,
-    #[clap(name = "16.1")]
-    Xcode16_1,
+    #[clap(name = "16.2")]
+    Xcode16_2,
 }
 
 impl Display for XcodeVersion {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             XcodeVersion::Xcode15_4 => f.write_str("15.4"),
-            XcodeVersion::Xcode16_1 => f.write_str("16.1"),
+            XcodeVersion::Xcode16_2 => f.write_str("16.2"),
         }
     }
 }
@@ -152,23 +152,23 @@ pub(crate) fn get_supported_configs(
         ),
         (
             Some(IosDevice::IPhone16),
-            Some(XcodeVersion::Xcode16_1),
-            Some(OsVersion::Ios18_1),
+            Some(XcodeVersion::Xcode16_2),
+            Some(OsVersion::Ios18_2),
         ),
         (
             Some(IosDevice::IPhone16Pro),
-            Some(XcodeVersion::Xcode16_1),
-            Some(OsVersion::Ios18_1),
+            Some(XcodeVersion::Xcode16_2),
+            Some(OsVersion::Ios18_2),
         ),
         (
             Some(IosDevice::IPhone16ProMax),
-            Some(XcodeVersion::Xcode16_1),
-            Some(OsVersion::Ios18_1),
+            Some(XcodeVersion::Xcode16_2),
+            Some(OsVersion::Ios18_2),
         ),
         (
             Some(IosDevice::IPhone11),
-            Some(XcodeVersion::Xcode16_1),
-            Some(OsVersion::Ios18_1),
+            Some(XcodeVersion::Xcode16_2),
+            Some(OsVersion::Ios18_2),
         ),
     ]
 }
@@ -268,10 +268,10 @@ Supported iOS settings combinations are:
     --xcode-version 15.4 --os-version 17.5 --device iPhone-15-Pro
     --xcode-version 15.4 --os-version 17.5 --device iPhone-15-Pro-Max
     --xcode-version 15.4 --os-version 17.5 --device iPhone-11
-    --xcode-version 16.1 --os-version 18.1 --device iPhone-16
-    --xcode-version 16.1 --os-version 18.1 --device iPhone-16-Pro
-    --xcode-version 16.1 --os-version 18.1 --device iPhone-16-Pro-Max
-    --xcode-version 16.1 --os-version 18.1 --device iPhone-11
+    --xcode-version 16.2 --os-version 18.2 --device iPhone-16
+    --xcode-version 16.2 --os-version 18.2 --device iPhone-16-Pro
+    --xcode-version 16.2 --os-version 18.2 --device iPhone-16-Pro-Max
+    --xcode-version 16.2 --os-version 18.2 --device iPhone-11
 First example: If you choose --xcode-version 15.4 --device iPhone-15-Pro then the --os-version will be inferred (17.5).
 Second example: If you choose --device iPhone-11 then you will receive an error because --os-version and --xcode-version params are ambiguous."
                         .into(),
@@ -458,8 +458,8 @@ mod tests {
             infer_parameters(provided_device, None, None).await?;
 
         assert_eq!(inferred_device, IosDevice::IPhone16);
-        assert_eq!(inferred_xcode_version, XcodeVersion::Xcode16_1);
-        assert_eq!(inferred_os_version, OsVersion::Ios18_1);
+        assert_eq!(inferred_xcode_version, XcodeVersion::Xcode16_2);
+        assert_eq!(inferred_os_version, OsVersion::Ios18_2);
 
         Ok(())
     }
